@@ -1,0 +1,64 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 29
+    buildToolsVersion "29.0.3"
+    defaultConfig {
+        applicationId "com.ivo.dev.boox.rnd.screen"
+        minSdkVersion 21
+        targetSdkVersion 28
+        versionCode 1
+        versionName "1.0"
+        multiDexEnabled true
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                includeCompileClasspath = true
+                arguments=['targetModuleName':'Scribble']
+            }
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    lintOptions {
+        abortOnError false
+    }
+
+    packagingOptions {
+        exclude 'lib/armeabi-v7a/libc++_shared.so'
+        exclude 'lib/arm64-v8a/libc++_shared.so'
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test:runner:1.2.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+
+    implementation('com.onyx.android.sdk:onyxsdk-base:1.5.3')
+    implementation('com.onyx.android.sdk:onyxsdk-data:1.1.4')
+    implementation('com.onyx.android.sdk:onyxsdk-notedata:1.0.7@aar')
+    implementation('com.onyx.android.sdk:onyxsdk-pen:1.1.2')
+    implementation('com.onyx.android.sdk:onyxsdk-device:1.0.3')
+
+    implementation "com.android.support:multidex:1.0.3"
+    implementation "com.android.support.constraint:constraint-layout:1.1.3"
+
+    implementation 'com.jakewharton:butterknife:7.0.1'
+
+    annotationProcessor "com.github.Raizlabs.DBFlow:dbflow-processor:4.2.2"
+    implementation "com.github.Raizlabs.DBFlow:dbflow-core:4.2.2"
+    implementation "com.github.Raizlabs.DBFlow:dbflow:4.2.2"
+
+    implementation "androidx.work:work-runtime:2.3.4"
+}
